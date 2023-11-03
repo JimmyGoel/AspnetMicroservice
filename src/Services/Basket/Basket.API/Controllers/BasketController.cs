@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Basket.API.Entites;
+using Basket.API.gRPCService;
 using Basket.API.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,6 @@
+using Basket.API.gRPCService;
 using Basket.API.Repositories;
+using Discount.Grpc.Protos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -35,6 +37,13 @@ namespace Basket.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog API", Version = "v1" });
             });
             services.AddScoped<IBasketRepository, BasketRepository>();
+            services.AddScoped<DiscountGrpcService>();
+
+            services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opt =>
+            {
+                opt.Address = new Uri(Configuration["GRPCSettings:DiscountURI"]);
+            });
+
             services.AddControllers();
         }
 
